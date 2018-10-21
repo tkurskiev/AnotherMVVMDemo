@@ -31,11 +31,13 @@ namespace AnotherMVVMDemo
             var viewType = d.GetType();
 
             string str = viewType.FullName;
-            str = str.Replace(".Views.", ".");
+            str = str.Replace(".Views.", "."); // Replaced ".Views." with just a dot, because my ViewModel and View namespace is local (AnotherMVVMDemo).
 
             var viewTypeName = str;
             var viewModelTypeName = viewTypeName + "Model";
-            var viewModelType = Type.GetType(viewModelTypeName);
+
+            // And because we now have a viewModelTypeName as *for example* "AnotherMVVMDemo.StudentViewModel" (without ".ViewModel.")
+            var viewModelType = Type.GetType(viewModelTypeName); // Type.GetType is able to be resolved
             var viewModel = Activator.CreateInstance(viewModelType);
 
 

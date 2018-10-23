@@ -20,10 +20,16 @@ namespace AnotherMVVMDemo
             }
             set
             {
-                if (firstName != value)
-                    firstName = value;
-                RaisePropertyChanged("FirstName");
-                RaisePropertyChanged("FullName");
+                //if (firstName != value)
+                //    firstName = value;
+
+                // Другой вариант того, что закомменчено выше
+                if (firstName == value)
+                    return;
+                firstName = value;
+                RaisePropertyChanged(nameof(FirstName));  // Обрати внимание на nameof
+                //  БЫЛО ТАК: RaisePropertyChanged("FirstName"); если как выше, то свойство можно легко переименовать и логика продолжит работать
+                RaisePropertyChanged(nameof(FullName));   
             }
         }
 
@@ -37,8 +43,8 @@ namespace AnotherMVVMDemo
             {
                 if (lastName != value)
                     lastName = value;
-                RaisePropertyChanged("LastName");
-                RaisePropertyChanged("FullName");
+                RaisePropertyChanged(nameof(LastName));
+                RaisePropertyChanged(nameof(FullName));
             }
         }
 
